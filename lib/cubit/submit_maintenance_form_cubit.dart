@@ -5,5 +5,6 @@ import 'package:maintenance_app/cubit/submit_maintenance_form_states.dart';
 class SubmitFormCubit extends Cubit<SubmitMaintenanceFormStates> {
   SubmitFormCubit() : super(SubmitFormInitialState());
 
-  static SubmitFormCubit get(context)=>BlocProvider.of(context);
+  static SubmitFormCubit get(context) => BlocProvider.of(context);
+
 }
