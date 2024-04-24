@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'shared/custom_widgets/custom_text_form_field.dart';
+
 class MaintenanceForm extends StatefulWidget {
   const MaintenanceForm({super.key});
 
@@ -28,6 +30,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
         child: Form(
           key: formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextFormField(
                 keyboardType: TextInputType.name,
@@ -88,58 +91,22 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                 keyboardType: TextInputType.text,
                 onSaved: (value) {},
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              )
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    required this.textEditingController,
-    required this.hintText,
-    required this.prefixIcon,
-    required this.keyboardType,
-    this.onSaved,
-  });
-
-  final TextEditingController textEditingController;
-  final String hintText;
-  final Icon prefixIcon;
-  final void Function(String?)? onSaved;
-  final TextInputType keyboardType;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      controller: textEditingController,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'This field is required';
-        } else {
-          return null;
-        }
-      },
-      onSaved: (value) {},
-      decoration: InputDecoration(
-        border: buildOutlineInputBorder(),
-        enabledBorder: buildOutlineInputBorder(),
-        hintText: hintText,
-        prefixIcon: prefixIcon,
-      ),
-    );
-  }
-
-  OutlineInputBorder buildOutlineInputBorder() {
-    return OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(
-          width: 2,
-          color: Colors.black,
-        ));
   }
 }
