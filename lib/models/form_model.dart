@@ -6,6 +6,8 @@ class FormModel {
   final String buildingNo;
   final String floorNo;
   final String apartmentNo;
+  String? addressDetails;
+  String? maintenanceDetails;
 
   FormModel({
     required this.formId,
@@ -15,6 +17,8 @@ class FormModel {
     required this.buildingNo,
     required this.floorNo,
     required this.apartmentNo,
+    required this.addressDetails,
+    required this.maintenanceDetails,
   });
 
   factory FormModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class FormModel {
       buildingNo: json['buildingNo'],
       floorNo: json['floorNo'],
       apartmentNo: json['apartmentNo'],
+      addressDetails: json['addressDetails'],
+      maintenanceDetails: json['maintenanceDetails'],
     );
   }
 
@@ -38,6 +44,8 @@ class FormModel {
       'buildingNo': buildingNo,
       'floorNo': floorNo,
       'apartmentNo': apartmentNo,
+      'addressDetails': addressDetails,
+      'maintenanceDetails': maintenanceDetails,
     };
   }
 }

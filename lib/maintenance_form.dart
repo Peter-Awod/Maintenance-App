@@ -23,18 +23,25 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
   var floorNumberController = TextEditingController();
   var apartmentNumberController = TextEditingController();
   var maintenanceTypeController = TextEditingController();
+  var addressDetailsController = TextEditingController();
+  var maintenanceDetailsController = TextEditingController();
 
-  String? name, mobileNumber, maintenanceType, buildingNumber, floorNumber,
+  String? name,
+      mobileNumber,
+      maintenanceType,
+      buildingNumber,
+      floorNumber,
       apartmentNumber;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SubmitFormCubit(),
-      child: BlocConsumer<SubmitFormCubit, SubmitMaintenanceFormStates>(
+      create: (context) => SubmitMaintenanceFormCubit(),
+      child:
+          BlocConsumer<SubmitMaintenanceFormCubit, SubmitMaintenanceFormStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          SubmitFormCubit formCubit = BlocProvider.of(context);
+          SubmitMaintenanceFormCubit formCubit = BlocProvider.of(context);
           return Scaffold(
             appBar: AppBar(
               title: const Text('Maintenance Form'),
@@ -81,7 +88,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                         prefixIcon: const Icon(Icons.house_outlined),
                         keyboardType: TextInputType.number,
                         onSaved: (value) {
-                          buildingNumber = value !;
+                          buildingNumber = value!;
                         },
                       ),
                       const SizedBox(
@@ -93,7 +100,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                         prefixIcon: const Icon(Icons.house_outlined),
                         keyboardType: TextInputType.number,
                         onSaved: (value) {
-                          floorNumber = value !;
+                          floorNumber = value!;
                         },
                       ),
                       const SizedBox(
@@ -105,7 +112,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                         prefixIcon: const Icon(Icons.apartment_outlined),
                         keyboardType: TextInputType.number,
                         onSaved: (value) {
-                          apartmentNumber = value !;
+                          apartmentNumber = value!;
                         },
                       ),
                       const SizedBox(
@@ -121,24 +128,59 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                         },
                       ),
                       const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextFormField(
+                        textEditingController: addressDetailsController,
+                        hintText: 'Add more details about address',
+                        prefixIcon: const Icon(Icons.location_on_outlined),
+                        keyboardType: TextInputType.text,
+                        onSaved: (value) {
+                          maintenanceType = value!;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextFormField(
+                        textEditingController: maintenanceDetailsController,
+                        hintText:
+                            'Add more details about your maintenance request',
+                        prefixIcon: const Icon(Icons.engineering_outlined),
+                        keyboardType: TextInputType.text,
+                        onSaved: (value) {
+                          maintenanceType = value!;
+                        },
+                      ),
+                      const SizedBox(
                         height: 20,
                       ),
                       MaterialButton(
                         onPressed: () {
+                          if (addressDetailsController.text == null ||
+                              addressDetailsController.text.isEmpty) {
+                            addressDetailsController.text = 'No details';
+                          }
+                          if (maintenanceDetailsController.text == null ||
+                              maintenanceDetailsController.text.isEmpty) {
+                            maintenanceDetailsController.text = 'No details';
+                          }
+
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
                             var formModel = FormModel(
-                              formId: '',
-                              name: nameController.text,
-                              phone: mobileNumberController.text,
-                              maintenanceType: maintenanceTypeController.text,
-                              buildingNo: buildingNumberController.text,
-                              floorNo: floorNumberController.text,
-                              apartmentNo: apartmentNumberController.text,
-                            );
+                                formId: '',
+                                name: nameController.text,
+                                phone: mobileNumberController.text,
+                                maintenanceType: maintenanceTypeController.text,
+                                buildingNo: buildingNumberController.text,
+                                floorNo: floorNumberController.text,
+                                apartmentNo: apartmentNumberController.text,
+                                addressDetails: addressDetailsController.text,
+                                maintenanceDetails:
+                                    maintenanceDetailsController.text);
                             formCubit.submitForm(formModel);
-                          }
-                          else {
+                          } else {
                             autovalidateMode = AutovalidateMode.always;
                           }
                         },

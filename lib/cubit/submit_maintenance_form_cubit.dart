@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maintenance_app/cubit/submit_maintenance_form_states.dart';
 import 'package:maintenance_app/models/form_model.dart';
 
-class SubmitFormCubit extends Cubit<SubmitMaintenanceFormStates> {
-  SubmitFormCubit() : super(SubmitFormInitialState());
+class SubmitMaintenanceFormCubit extends Cubit<SubmitMaintenanceFormStates> {
+  SubmitMaintenanceFormCubit() : super(SubmitFormInitialState());
 
-  static SubmitFormCubit get(context) => BlocProvider.of(context);
+  static SubmitMaintenanceFormCubit get(context) => BlocProvider.of(context);
 
   submitForm(FormModel formModel) {
     emit(SubmitFormLoadingState());
@@ -22,7 +22,7 @@ class SubmitFormCubit extends Cubit<SubmitMaintenanceFormStates> {
       if (kDebugMode) {
         print('Submit form error state ==  ${error.toString()}');
       }
-      emit(SubmitFormFailureState(error: error));
+      emit(SubmitFormFailureState(error: error.toString()));
     });
   }
 }
