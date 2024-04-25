@@ -3,9 +3,9 @@ class FormModel {
   final String phone;
   final String maintenanceType;
   String? formId;
-  final int buildingNo;
-  final int floorNo;
-  final int apartmentNo;
+  final String buildingNo;
+  final String floorNo;
+  final String apartmentNo;
 
   FormModel({
     required this.formId,
