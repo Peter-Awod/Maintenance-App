@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maintenance_app/cubit/submit_maintenance_form_cubit.dart';
 import 'package:maintenance_app/cubit/submit_maintenance_form_states.dart';
 import 'package:maintenance_app/models/form_model.dart';
+import 'package:maintenance_app/shared/custom_widgets/custom_material_button.dart';
 
-import 'shared/custom_widgets/custom_text_form_field.dart';
+import '../shared/constants.dart';
+import '../shared/custom_widgets/custom_text_form_field.dart';
 
 class MaintenanceForm extends StatefulWidget {
   const MaintenanceForm({super.key});
@@ -43,16 +45,36 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
         builder: (context, state) {
           SubmitMaintenanceFormCubit formCubit = BlocProvider.of(context);
           return Scaffold(
+            backgroundColor: kPrimaryColor,
             appBar: AppBar(
-              title: const Text('Maintenance Form'),
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  color: kSecondaryColor,
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: const Text(
+                'Maintenance Form',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: kSecondaryColor,
+                ),
+              ),
               centerTitle: true,
             ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Form(
-                  autovalidateMode: autovalidateMode,
-                  key: formKey,
+              child: Form(
+                autovalidateMode: autovalidateMode,
+                key: formKey,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -155,42 +177,73 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      MaterialButton(
-                        onPressed: () {
-                          if (addressDetailsController.text == null ||
-                              addressDetailsController.text.isEmpty) {
-                            addressDetailsController.text = 'No details';
-                          }
-                          if (maintenanceDetailsController.text == null ||
-                              maintenanceDetailsController.text.isEmpty) {
-                            maintenanceDetailsController.text = 'No details';
-                          }
+                      CustomMaterialButton(
+                          onPressed: () {
+                            if (addressDetailsController.text == null ||
+                                addressDetailsController.text.isEmpty) {
+                              addressDetailsController.text = 'No details';
+                            }
+                            if (maintenanceDetailsController.text == null ||
+                                maintenanceDetailsController.text.isEmpty) {
+                              maintenanceDetailsController.text = 'No details';
+                            }
 
-                          if (formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
-                            var formModel = FormModel(
-                                formId: '',
-                                name: nameController.text,
-                                phone: mobileNumberController.text,
-                                maintenanceType: maintenanceTypeController.text,
-                                buildingNo: buildingNumberController.text,
-                                floorNo: floorNumberController.text,
-                                apartmentNo: apartmentNumberController.text,
-                                addressDetails: addressDetailsController.text,
-                                maintenanceDetails:
-                                    maintenanceDetailsController.text);
-                            formCubit.submitForm(formModel);
-                          } else {
-                            autovalidateMode = AutovalidateMode.always;
-                          }
-                        },
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        ),
-                      )
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              var formModel = FormModel(
+                                  formId: '',
+                                  name: nameController.text,
+                                  phone: mobileNumberController.text,
+                                  maintenanceType:
+                                      maintenanceTypeController.text,
+                                  buildingNo: buildingNumberController.text,
+                                  floorNo: floorNumberController.text,
+                                  apartmentNo: apartmentNumberController.text,
+                                  addressDetails: addressDetailsController.text,
+                                  maintenanceDetails:
+                                      maintenanceDetailsController.text);
+                              formCubit.submitForm(formModel);
+                            } else {
+                              autovalidateMode = AutovalidateMode.always;
+                            }
+                          },
+                          buttonName: 'Submit'),
+                      // MaterialButton(
+                      //   onPressed: () {
+                      //     if (addressDetailsController.text == null ||
+                      //         addressDetailsController.text.isEmpty) {
+                      //       addressDetailsController.text = 'No details';
+                      //     }
+                      //     if (maintenanceDetailsController.text == null ||
+                      //         maintenanceDetailsController.text.isEmpty) {
+                      //       maintenanceDetailsController.text = 'No details';
+                      //     }
+                      //
+                      //     if (formKey.currentState!.validate()) {
+                      //       formKey.currentState!.save();
+                      //       var formModel = FormModel(
+                      //           formId: '',
+                      //           name: nameController.text,
+                      //           phone: mobileNumberController.text,
+                      //           maintenanceType: maintenanceTypeController.text,
+                      //           buildingNo: buildingNumberController.text,
+                      //           floorNo: floorNumberController.text,
+                      //           apartmentNo: apartmentNumberController.text,
+                      //           addressDetails: addressDetailsController.text,
+                      //           maintenanceDetails:
+                      //               maintenanceDetailsController.text);
+                      //       formCubit.submitForm(formModel);
+                      //     } else {
+                      //       autovalidateMode = AutovalidateMode.always;
+                      //     }
+                      //   },
+                      //   child: const Text(
+                      //     'Submit',
+                      //     style: TextStyle(
+                      //       fontSize: 24,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

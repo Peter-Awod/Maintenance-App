@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class CustomMaterialButton extends StatelessWidget {
   const CustomMaterialButton(
       {super.key, required this.onPressed, required this.buttonName});
@@ -10,16 +12,17 @@ class CustomMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width:MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
       child: MaterialButton(
+
         onPressed: onPressed,
         child: Text(
           buttonName,
-          style: const TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24,color: kButtonsColor),
         ),
       ),
     );

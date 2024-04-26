@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_app/shared/constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -7,7 +8,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.keyboardType,
-    this.onSaved, this.onChanged,
+    this.onSaved,
+    this.onChanged,
   });
 
   final TextEditingController textEditingController;
@@ -20,6 +22,9 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      scrollPadding: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).viewInsets.bottom+100,
+      ),
       keyboardType: keyboardType,
       controller: textEditingController,
       validator: (value) {
@@ -30,12 +35,17 @@ class CustomTextFormField extends StatelessWidget {
         }
       },
       onSaved: (value) {},
-      onChanged: (value){},
+      onChanged: (value) {},
       decoration: InputDecoration(
         border: buildOutlineInputBorder(),
         enabledBorder: buildOutlineInputBorder(),
         hintText: hintText,
+        hintStyle: const TextStyle(
+          color: kSecondaryColor,
+        ),
         prefixIcon: prefixIcon,
+        prefixIconColor: kSecondaryColor,
+
       ),
     );
   }
@@ -45,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         borderSide: const BorderSide(
           width: 2,
-          color: Colors.black,
+          color: kSecondaryColor,
         ));
   }
 }
