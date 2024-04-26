@@ -7,13 +7,14 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.keyboardType,
-    this.onSaved,
+    this.onSaved, this.onChanged,
   });
 
   final TextEditingController textEditingController;
   final String hintText;
   final Icon prefixIcon;
   final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
   final TextInputType keyboardType;
 
   @override
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
         }
       },
       onSaved: (value) {},
+      onChanged: (value){},
       decoration: InputDecoration(
         border: buildOutlineInputBorder(),
         enabledBorder: buildOutlineInputBorder(),
