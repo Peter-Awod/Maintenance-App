@@ -14,7 +14,7 @@ class CustomMaterialButton extends StatelessWidget {
     return Container(
       width:MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: kSecondaryColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: MaterialButton(

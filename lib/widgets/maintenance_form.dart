@@ -95,7 +95,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                       CustomTextFormField(
                         textEditingController: mobileNumberController,
                         hintText: 'Enter your phone number',
-                        prefixIcon: const Icon(Icons.phone_android_outlined),
+                        prefixIcon: const Icon(Icons.phone_iphone_outlined),
                         keyboardType: TextInputType.phone,
                         onSaved: (value) {
                           mobileNumber = value!;

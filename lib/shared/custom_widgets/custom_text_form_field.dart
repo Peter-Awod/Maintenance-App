@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.keyboardType,
     this.onSaved,
     this.onChanged,
+    this.obscureText = false,
   });
 
   final TextEditingController textEditingController;
@@ -18,12 +19,13 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
   final TextInputType keyboardType;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       scrollPadding: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).viewInsets.bottom+100,
+        vertical: MediaQuery.of(context).viewInsets.bottom + 100,
       ),
       keyboardType: keyboardType,
       controller: textEditingController,
@@ -34,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
           return null;
         }
       },
+      obscureText: obscureText,
       onSaved: (value) {},
       onChanged: (value) {},
       decoration: InputDecoration(
@@ -45,7 +48,6 @@ class CustomTextFormField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         prefixIconColor: kSecondaryColor,
-
       ),
     );
   }
