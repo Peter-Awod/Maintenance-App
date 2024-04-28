@@ -4,6 +4,7 @@ import 'package:maintenance_app/cubit/submit_maintenance_form_cubit.dart';
 import 'package:maintenance_app/cubit/submit_maintenance_form_states.dart';
 import 'package:maintenance_app/models/form_model.dart';
 import 'package:maintenance_app/shared/custom_widgets/custom_material_button.dart';
+import 'package:maintenance_app/shared/custom_widgets/snack_bar.dart';
 
 import '../shared/constants.dart';
 import '../shared/custom_widgets/custom_text_form_field.dart';
@@ -41,7 +42,13 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
       create: (context) => SubmitMaintenanceFormCubit(),
       child:
           BlocConsumer<SubmitMaintenanceFormCubit, SubmitMaintenanceFormStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is SubmitFormSuccessState)
+            {
+             showSnackBar(context: context, message: 'Form submitted successfully');
+              Navigator.pop(context);
+            }
+        },
         builder: (context, state) {
           SubmitMaintenanceFormCubit formCubit = BlocProvider.of(context);
           return Scaffold(

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maintenance_app/shared/constants.dart';
+import 'package:maintenance_app/widgets/login/login.dart';
 import 'package:maintenance_app/widgets/maintenance_form.dart';
 
 import '../shared/custom_widgets/custom_material_button.dart';
@@ -41,6 +43,23 @@ class HomeWidget extends StatelessWidget {
               buttonName: 'Request a service',
             ),
 
+            const SizedBox(
+              height: 20,
+            ),
+            // Logout
+            CustomMaterialButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                  (route) => false,
+                );
+              },
+              buttonName: 'Logout',
+            ),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maintenance_app/widgets/home.dart';
@@ -38,17 +40,23 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {
+        listener: (context, state) async{
           if (state is LoginSuccessState) {
             showSnackBar(
               context: context,
-              message: 'Successfully login .',
+              message: 'Successfully login',
             );
-            Navigator.push(
+           var token=await FirebaseAuth.instance.currentUser!.getIdToken();
+            if (kDebugMode) {
+
+              print( 'Token $token');
+            }
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomeWidget(),
               ),
+                  (route) => false,
             );
           }
         },
