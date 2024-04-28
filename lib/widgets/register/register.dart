@@ -100,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           // email
@@ -114,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           // phone
