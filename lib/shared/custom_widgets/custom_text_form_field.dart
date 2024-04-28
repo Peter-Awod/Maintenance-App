@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_app/shared/constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    required this.textEditingController,
-    required this.hintText,
-    required this.prefixIcon,
-    required this.keyboardType,
-    this.onSaved,
-    this.onChanged,
-    this.obscureText = false,
-  });
+  const CustomTextFormField(
+      {super.key,
+      required this.textEditingController,
+      required this.hintText,
+      required this.prefixIcon,
+      required this.keyboardType,
+      this.onSaved,
+      this.onChanged,
+      this.obscureText = false,
+      this.suffixIcon, this.suffixIconPressed});
 
   final TextEditingController textEditingController;
   final String hintText;
   final Icon prefixIcon;
+  final IconData? suffixIcon;
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
   final TextInputType keyboardType;
   final bool obscureText;
+  final void Function()? suffixIconPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,10 @@ class CustomTextFormField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         prefixIconColor: kSecondaryColor,
+        suffixIconColor: kSecondaryColor,
+        suffixIcon: suffixIcon != null
+            ? IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon),)
+            : null,
       ),
     );
   }
