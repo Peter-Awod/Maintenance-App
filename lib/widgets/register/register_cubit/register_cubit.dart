@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,12 @@ class RegisterCubit extends Cubit<RegisterStates> {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       UserModel userModel = UserModel(
-          name: name, phone: phone, email: email, userId: value.user!.uid);
+        name: name,
+        phone: phone,
+        email: email,
+        userId: value.user!.uid,
+        isAdmin: false,
+      );
       createUser(userModel: userModel);
     }).catchError((error) {
       if (error.toString() ==
@@ -73,7 +77,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   // change password visibility
 
-  IconData suffix =  Icons.visibility_outlined;
+  IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
 
   void changeIcon() {

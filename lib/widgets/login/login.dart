@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
            var token=await FirebaseAuth.instance.currentUser!.getIdToken();
             if (kDebugMode) {
 
-              print( 'Token $token');
+              print( 'Token $token token end');
             }
             Navigator.pushAndRemoveUntil(
               context,
