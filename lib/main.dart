@@ -15,19 +15,21 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Widget startPoint;
-  if(FirebaseAuth.instance.currentUser != null)
-    {
-      startPoint =const HomeWidget();
-    }
-  else{
-    startPoint =const LoginScreen();
+  if (FirebaseAuth.instance.currentUser != null) {
+    startPoint = const HomeWidget();
+  } else {
+    startPoint = const LoginScreen();
   }
-  runApp(MyApp(startPoint: startPoint,));
+  runApp(MyApp(
+    startPoint: startPoint,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.startPoint});
+
   final Widget startPoint;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -38,4 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
