@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maintenance_app/cubit/user_info_cubit/user_info_cubit.dart';
 
 import 'firebase_options.dart';
 import 'widgets/login/login.dart';
@@ -33,10 +35,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Maintenance App',
-      debugShowCheckedModeBanner: false,
-      home: startPoint,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserInfoCubit()..getUserInfo(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Maintenance App',
+        debugShowCheckedModeBanner: false,
+        home: startPoint,
+      ),
     );
   }
 }

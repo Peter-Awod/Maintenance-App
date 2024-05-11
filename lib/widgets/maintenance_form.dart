@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maintenance_app/cubit/submit_maintenance_form_cubit.dart';
-import 'package:maintenance_app/cubit/submit_maintenance_form_states.dart';
+import 'package:maintenance_app/cubit/submit_maintenance_form_cubit/submit_maintenance_form_cubit.dart';
+import 'package:maintenance_app/cubit/submit_maintenance_form_cubit/submit_maintenance_form_states.dart';
+import 'package:maintenance_app/cubit/user_info_cubit/user_info_cubit.dart';
 import 'package:maintenance_app/models/form_model.dart';
 import 'package:maintenance_app/shared/custom_widgets/custom_material_button.dart';
 import 'package:maintenance_app/shared/custom_widgets/snack_bar.dart';
@@ -49,6 +50,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
           if (state is SubmitFormSuccessState) {
             showSnackBar(
                 context: context, message: 'Form submitted successfully');
+            BlocProvider.of<UserInfoCubit>(context).getUserInfo();
             Navigator.pop(context);
           }
         },

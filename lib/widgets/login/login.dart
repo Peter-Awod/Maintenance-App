@@ -2,16 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maintenance_app/widgets/home.dart';
-import 'package:maintenance_app/widgets/login/login_cubit/login_cubit.dart';
-import 'package:maintenance_app/widgets/login/login_cubit/login_states.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../../cubit/user_info_cubit/user_info_cubit.dart';
 import '../../shared/constants.dart';
 import '../../shared/custom_widgets/custom_material_button.dart';
 import '../../shared/custom_widgets/custom_text_form_field.dart';
 import '../../shared/custom_widgets/snack_bar.dart';
+import '../home.dart';
 import '../register/register.dart';
+import 'login_cubit/login_cubit.dart';
+import 'login_cubit/login_states.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,23 +41,23 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) async{
+        listener: (context, state) {
           if (state is LoginSuccessState) {
             showSnackBar(
               context: context,
               message: 'Successfully login',
             );
-           var token=await FirebaseAuth.instance.currentUser!.getIdToken();
+            UserInfoCubit.get(context).getUserInfo();
+            var token = FirebaseAuth.instance.currentUser!.getIdToken();
             if (kDebugMode) {
-
-              print( 'Token $token token end');
+              print('Token $token token end');
             }
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomeWidget(),
               ),
-                  (route) => false,
+              (route) => false,
             );
           }
         },
@@ -127,12 +128,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (formKey.currentState!.validate()) {
                                 formKey.currentState!.save();
 
-                                  isLoading = true;
-                                  setState(() {});
-                                  await loginCubit.userLogin(context: context,
-                                    email: emailAddressController.text,
-                                    password: passwordController.text,
-                                  );
+                                isLoading = true;
+                                setState(() {});
+                                await loginCubit.userLogin(
+                                  context: context,
+                                  email: emailAddressController.text,
+                                  password: passwordController.text,
+                                );
 
                                 isLoading = false;
                                 setState(() {});

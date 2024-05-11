@@ -30,6 +30,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         email: email,
         userId: value.user!.uid,
         isAdmin: false,
+        isRequested: false,
       );
       createUser(userModel: userModel);
     }).catchError((error) {
