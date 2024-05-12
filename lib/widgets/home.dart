@@ -7,6 +7,7 @@ import 'package:maintenance_app/cubit/user_info_cubit/user_info_states.dart';
 import 'package:maintenance_app/shared/constants.dart';
 import 'package:maintenance_app/widgets/login/login.dart';
 import 'package:maintenance_app/widgets/maintenance_form.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../shared/custom_widgets/custom_material_button.dart';
 import '../shared/custom_widgets/shimmer_view_builder.dart';
@@ -81,8 +82,15 @@ class HomeWidget extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                  if (user.isAdmin == false)
-                    CustomMaterialButton(onPressed: () {}, buttonName: 'User'),
+                  if (user.isAdmin == false && user.isRequested == true)
+                    CustomMaterialButton(
+                      onPressed: () async {
+                        await launchUrl(
+                            Uri.parse('https://wa.me/message/3HWAG3EWMI2YN1'));
+                      },
+                      buttonName: 'Contact us',
+                      showIcon: true,
+                    ),
                 ],
               ),
             ),
@@ -93,5 +101,3 @@ class HomeWidget extends StatelessWidget {
     );
   }
 }
-
-
