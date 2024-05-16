@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_app/shared/constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.textEditingController,
-      required this.hintText,
-      required this.prefixIcon,
-      required this.keyboardType,
-      this.onSaved,
-      this.onChanged,
-      this.obscureText = false,
-      this.suffixIcon, this.suffixIconPressed});
+  const CustomTextFormField({
+    super.key,
+    required this.textEditingController,
+    required this.hintText,
+    required this.prefixIcon,
+    required this.keyboardType,
+    this.onSaved,
+    this.onChanged,
+    this.obscureText = false,
+    this.suffixIcon,
+    this.suffixIconPressed,
+    this.maxLines = 1,
+  });
 
   final TextEditingController textEditingController;
   final String hintText;
@@ -22,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final void Function()? suffixIconPressed;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,9 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       onSaved: (value) {},
       onChanged: (value) {},
+      maxLines: maxLines,
       decoration: InputDecoration(
+
         border: buildOutlineInputBorder(),
         enabledBorder: buildOutlineInputBorder(),
         hintText: hintText,
@@ -52,7 +58,10 @@ class CustomTextFormField extends StatelessWidget {
         prefixIconColor: kSecondaryColor,
         suffixIconColor: kSecondaryColor,
         suffixIcon: suffixIcon != null
-            ? IconButton(onPressed: suffixIconPressed, icon: Icon(suffixIcon),)
+            ? IconButton(
+                onPressed: suffixIconPressed,
+                icon: Icon(suffixIcon),
+              )
             : null,
       ),
     );

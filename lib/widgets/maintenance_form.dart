@@ -179,12 +179,13 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                       // address details
                       CustomTextFormField(
                         textEditingController: addressDetailsController,
-                        hintText: 'Add more details about address',
+                        hintText: 'Add more details about address (optional)',
                         prefixIcon: const Icon(Icons.location_on_outlined),
                         keyboardType: TextInputType.text,
                         onSaved: (value) {
                           maintenanceType = value!;
                         },
+                        maxLines: 3,
                       ),
                       const SizedBox(
                         height: 10,
@@ -194,12 +195,13 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                       CustomTextFormField(
                         textEditingController: maintenanceDetailsController,
                         hintText:
-                            'Add more details about your maintenance request',
+                            'Add more details about your maintenance request (optional)',
                         prefixIcon: const Icon(Icons.engineering_outlined),
                         keyboardType: TextInputType.text,
                         onSaved: (value) {
                           maintenanceType = value!;
                         },
+                        maxLines: 3,
                       ),
                       const SizedBox(
                         height: 10,
@@ -256,6 +258,7 @@ class _MaintenanceFormState extends State<MaintenanceForm> {
                           onSaved: (value) {
                             permission = value!;
                           },
+                          maxLines: 3,
                         ),
                       const SizedBox(
                         height: 20,
