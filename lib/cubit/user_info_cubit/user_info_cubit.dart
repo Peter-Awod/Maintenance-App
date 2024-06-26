@@ -1,6 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/user_model.dart';
@@ -14,6 +15,7 @@ class UserInfoCubit extends Cubit<UserInfoStates> {
   // Getting current user information
   UserModel? userModel;
 
+
   void getUserInfo() {
     emit(GetUserLoadingState());
 
@@ -23,14 +25,10 @@ class UserInfoCubit extends Cubit<UserInfoStates> {
         .get()
         .then((value) {
       userModel = UserModel.fromJson(value.data()!);
-      if (kDebugMode) {
-        print('Get User success State -- --  ');
-      }
+
+
       emit(GetUserSuccessState());
     }).catchError((error) {
-      if (kDebugMode) {
-        print('Get User Error State -- -- ${error.toString()}');
-      }
       emit(GetUserErrorState(error.toString()));
     });
   }

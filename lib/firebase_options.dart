@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA7jE8XgOCyatrc67BdXZfpiHrRNoaKPPs',
-    appId: '1:1006873454343:android:388c3c8b64cf3ed52587a2',
-    messagingSenderId: '1006873454343',
-    projectId: 'branches-project',
-    storageBucket: 'branches-project.appspot.com',
+    apiKey: 'AIzaSyBt_HJ68_d2tjVy_a8aXmG91pjQ2ZPyjx0',
+    appId: '1:211339299296:android:2c6adc45a4a8a99408c385',
+    messagingSenderId: '211339299296',
+    projectId: 'msquared-hospitality-services',
+    storageBucket: 'msquared-hospitality-services.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCcThygkOVcoiWf2mYyRU0FBM1mvDL9kxs',
-    appId: '1:1006873454343:ios:abe0ab22fad6bcbb2587a2',
-    messagingSenderId: '1006873454343',
-    projectId: 'branches-project',
-    storageBucket: 'branches-project.appspot.com',
-    iosBundleId: 'com.example.maintenanceApp',
+    apiKey: 'AIzaSyCuJohkVUxN8gkJLl3GxRKb7pXmar90C78',
+    appId: '1:211339299296:ios:cd5644c55be227ad08c385',
+    messagingSenderId: '211339299296',
+    projectId: 'msquared-hospitality-services',
+    storageBucket: 'msquared-hospitality-services.appspot.com',
+    iosBundleId: 'com.example.msquaredHospitalityServices',
   );
 }

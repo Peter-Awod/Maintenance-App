@@ -4,7 +4,8 @@ class UserModel {
   final String phone;
   final String userId;
   final bool? isAdmin;
-  final bool? isRequested;
+  final bool? isRequestedService;
+  final bool? isComplainActive;
 
   UserModel({
     required this.name,
@@ -12,7 +13,8 @@ class UserModel {
     required this.phone,
     required this.userId,
     this.isAdmin,
-    this.isRequested,
+    this.isRequestedService,
+    this.isComplainActive,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -22,7 +24,8 @@ class UserModel {
       phone: json['phone'],
       userId: json['userId'],
       isAdmin: json['isAdmin'],
-      isRequested: json['isRequested'],
+      isRequestedService: json['isRequestedService'],
+      isComplainActive: json['isComplainActive'],
     );
   }
 
@@ -33,7 +36,8 @@ class UserModel {
       'phone': phone,
       'userId': userId,
       'isAdmin': isAdmin,
-      'isRequested': isRequested,
+      'isRequestedService': isRequestedService,
+      'isComplainActive': isComplainActive,
     };
   }
 }

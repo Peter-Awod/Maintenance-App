@@ -1,14 +1,17 @@
-import 'package:bloc/bloc.dart';
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maintenance_app/cubit/user_info_cubit/user_info_cubit.dart';
 
+import 'cubit/get_complaints_cubit/get_complaints_cubit.dart';
+import 'cubit/get_complaints_cubit/get_complaints_states.dart';
+import 'cubit/user_info_cubit/user_info_cubit.dart';
 import 'firebase_options.dart';
-import 'widgets/login/login.dart';
 import 'shared/bloc_observer.dart';
 import 'widgets/home.dart';
+import 'widgets/login/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +25,13 @@ void main() async {
   } else {
     startPoint = const LoginScreen();
   }
-  runApp(MyApp(
+  runApp(MsquaredHospitalityServices(
     startPoint: startPoint,
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.startPoint});
+class MsquaredHospitalityServices extends StatelessWidget {
+  const MsquaredHospitalityServices({super.key, required this.startPoint});
 
   final Widget startPoint;
 
@@ -40,9 +43,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => UserInfoCubit()..getUserInfo(),
         ),
+        BlocProvider(
+          create: (context) => GetComplaintsCubit()..getComplaints(),
+          child: BlocListener<GetComplaintsCubit,GetComplaintsStates>(
+            listener: (context, state) {
+
+            },
+          ),
+        )
       ],
       child: MaterialApp(
-        title: 'Maintenance App',
+        title: 'Msquared Hospitality Services',
         debugShowCheckedModeBanner: false,
         home: startPoint,
       ),

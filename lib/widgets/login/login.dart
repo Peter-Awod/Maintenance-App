@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -48,10 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
               message: 'Successfully login',
             );
             UserInfoCubit.get(context).getUserInfo();
-            var token = FirebaseAuth.instance.currentUser!.getIdToken();
-            if (kDebugMode) {
-              print('Token $token token end');
-            }
+            // var token = FirebaseAuth.instance.currentUser!.getIdToken();
+
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(

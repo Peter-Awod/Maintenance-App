@@ -1,6 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +31,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         email: email,
         userId: value.user!.uid,
         isAdmin: false,
-        isRequested: false,
+        isRequestedService: false,
       );
       createUser(userModel: userModel);
     }).catchError((error) {
@@ -53,9 +54,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
         );
       }
 
-      if (kDebugMode) {
-        print('Registration Error ${error.toString()} //');
-      }
       emit(RegisterErrorState(error.toString()));
     });
   }
@@ -69,9 +67,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
         .then((value) {
       emit(CreateUserSuccessState());
     }).catchError((error) {
-      if (kDebugMode) {
-        print('Create user Error ${error.toString()}');
-      }
       emit(CreateUserErrorState(error.toString()));
     });
   }

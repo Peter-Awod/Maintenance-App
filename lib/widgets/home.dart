@@ -1,16 +1,20 @@
+// ignore_for_file: avoid_print
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maintenance_app/cubit/user_info_cubit/user_info_cubit.dart';
-import 'package:maintenance_app/cubit/user_info_cubit/user_info_states.dart';
-import 'package:maintenance_app/shared/constants.dart';
-import 'package:maintenance_app/widgets/login/login.dart';
-import 'package:maintenance_app/widgets/maintenance_form.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../cubit/user_info_cubit/user_info_cubit.dart';
+import '../cubit/user_info_cubit/user_info_states.dart';
+import '../shared/constants.dart';
 import '../shared/custom_widgets/custom_material_button.dart';
 import '../shared/custom_widgets/shimmer_view_builder.dart';
+import 'active_complaints_list_view.dart';
+import 'complaints_form.dart';
+import 'login/login.dart';
+import 'maintenance_form.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key});
@@ -43,6 +47,8 @@ class HomeWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const Spacer(),
+                  //  Request a service
                   CustomMaterialButton(
                     onPressed: () {
                       Navigator.push(
@@ -54,10 +60,26 @@ class HomeWidget extends StatelessWidget {
                     },
                     buttonName: 'Request a service',
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
+
+                  // Complaints
+                  CustomMaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ComplaintsForm(),
+                        ),
+                      );
+                    },
+                    buttonName: 'Complaints',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
                   // Logout
                   CustomMaterialButton(
                     onPressed: () {
@@ -76,21 +98,59 @@ class HomeWidget extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  if (user!.isAdmin == true)
-                    CustomMaterialButton(onPressed: () {}, buttonName: 'Admin'),
-                  if (user.isAdmin == true)
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  if (user.isAdmin == false && user.isRequested == true)
+
+                  // // Admin button
+                  // if (user!.isAdmin == true)
+                  //   CustomMaterialButton(
+                  //     onPressed: () {},
+                  //     buttonName: 'Admin',
+                  //   ),
+                  // if (user.isAdmin == true)
+                  //   const SizedBox(
+                  //     height: 20,
+                  //   ),
+
+                  if (user!.isAdmin == false && user.isRequestedService == true)
+                    // Contact button
                     CustomMaterialButton(
                       onPressed: () async {
                         await launchUrl(
-                            Uri.parse('https://wa.me/message/3HWAG3EWMI2YN1'));
+                          Uri.parse('https://wa.me/message/3HWAG3EWMI2YN1'),
+                        );
                       },
                       buttonName: 'Contact us',
                       showIcon: true,
                     ),
+                  if (user.isAdmin == false && user.isRequestedService == true)
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                  //Active Complaints
+                  if (user.isAdmin == false && user.isComplainActive == true)
+                    CustomMaterialButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const ActiveComplaintsListView(),
+                          ),
+                        );
+                      },
+                      buttonName: 'Active Complaints',
+                    ),
+
+                  //
+                  const Spacer(),
+                  const Text(
+                    'Facility manager Ahmed Gheneiwa',
+                    style: TextStyle(
+                      color: kSecondaryColor,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ),
             ),

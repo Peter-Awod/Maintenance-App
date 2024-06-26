@@ -12,3 +12,4 @@ class GetUserErrorState extends UserInfoStates {
 
   GetUserErrorState(this.error);
 }
+

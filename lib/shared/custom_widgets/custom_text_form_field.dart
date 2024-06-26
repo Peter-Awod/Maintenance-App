@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:maintenance_app/shared/constants.dart';
+
+import '../constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -33,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
       scrollPadding: EdgeInsets.symmetric(
         vertical: MediaQuery.of(context).viewInsets.bottom + 100,
       ),
+      maxLines: maxLines,
       keyboardType: keyboardType,
       controller: textEditingController,
       validator: (value) {
@@ -45,14 +49,13 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       onSaved: (value) {},
       onChanged: (value) {},
-      maxLines: maxLines,
       decoration: InputDecoration(
-
         border: buildOutlineInputBorder(),
         enabledBorder: buildOutlineInputBorder(),
         hintText: hintText,
         hintStyle: const TextStyle(
           color: kSecondaryColor,
+          fontSize: 12,
         ),
         prefixIcon: prefixIcon,
         prefixIconColor: kSecondaryColor,
